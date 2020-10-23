@@ -1,13 +1,13 @@
 ﻿using System;
 using HerosLib;
-
+using HerosUI.Menus;
 namespace HerosUI
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Hero obj=new Hero();
+            //Hero obj=new Hero();
             #region default constructor
             /*Hero obj=new Hero();
             Console.WriteLine($"{obj.id} {obj.name}" );*/
@@ -62,12 +62,38 @@ namespace HerosUI
             // }
             #endregion
             #region Dictionary<key, value>
-            Console.WriteLine("Super Hero     Hideout");
-            foreach(var superhero in Hero.hideOuts){
-               // Console.WriteLine($"{superhero.Key}   {Hero.hideOuts[superhero.Key]}"); // old way
-            //Console.WriteLine($"{superhero.Key} {superhero.Value}"); // new way of accessing key values
-            }
+            // Console.WriteLine("Super Hero     Hideout");
+            // foreach(var superhero in Hero.hideOuts){
+            //    // Console.WriteLine($"{superhero.Key}   {Hero.hideOuts[superhero.Key]}"); // old way
+            // //Console.WriteLine($"{superhero.Key} {superhero.Value}"); // new way of accessing key values
+            // }
             #endregion
+            #region Calling hero menu
+            // IMenu startMenu = new MainMenu();
+            // startMenu.Start();
+            #endregion
+            #region Delegate, Anonymous methods, Lambda
+            HeroTasks heroTasks=new HeroTasks();
+            
+            //HeroDel del=new HeroDel(heroTasks.GetPowers);
+            Action del =new Action(heroTasks.GetPowers);
+            //Func<string, string> fd=new Func<string, string>(some method);
+            //Predicate<string> predicate=new Predicate<string>(some method);            
+            del += heroTasks.DoWork; // += subscribe to a method
+            del += heroTasks.ManageLife;
+            del();
+            del -= heroTasks.ManageLife; // unsubscribe 
+            del();
+        
+        // Anonymous methods
+        Action<string> am=delegate(string name){
+            Console.WriteLine("Hello anonymous");
+        };
+        am("Pushpinder");
+        // Lambda expression - shorthand notations to anonymous methods
+        Action result= ()=>Console.WriteLine("Hello Lambda");
+        result();
+            #endregion 
         }
     }
 }

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace HerosLib
 {
+    // internal partial class Hero{
+    //     StreamReader streamReader;
+    // }
    #region  old way of creating class members
    /*public class Hero// default modifier -> internal
     {
@@ -34,7 +37,7 @@ namespace HerosLib
     }*/
    #endregion
    #region Mordern way of creating class member
-   public class Hero{
+   public partial class Hero{
        public int Id { get; set; }
        public string Name { get; set; }
        #region Arrays
@@ -52,9 +55,9 @@ namespace HerosLib
            superPowers.Push("Visibility");
            superPowers.Push("See through");
 
-           hideOuts.Add("Thor","Asgard");
-           hideOuts.Add("Batman","Batcave");
-           hideOuts.Add("Superman","Fortress Solitude ");
+        //    hideOuts.Add("Thor","Asgard");
+        //    hideOuts.Add("Batman","Batcave");
+        //    hideOuts.Add("Superman","Fortress Solitude ");
         }
        public static IEnumerable<string> GetSuperPowers(){
           
@@ -69,7 +72,7 @@ namespace HerosLib
        public void AddSuperPower(string superPower){
            if(superPower != null && superPower != ""){
                superPowers.Push(superPower);
-           }
+           } else throw new ArgumentException("Super power shouldn't be null");
        }
    }
    #endregion
