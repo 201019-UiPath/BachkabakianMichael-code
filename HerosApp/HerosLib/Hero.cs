@@ -58,6 +58,7 @@ namespace HerosLib
         //    hideOuts.Add("Thor","Asgard");
         //    hideOuts.Add("Batman","Batcave");
         //    hideOuts.Add("Superman","Fortress Solitude ");
+        //hi
         }
        public static IEnumerable<string> GetSuperPowers(){
           
