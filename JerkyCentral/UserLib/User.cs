@@ -20,6 +20,16 @@ namespace UserLib
             return names;
         }
 
+        public static void AddNames(string name)
+        {
+            if(names.Contains(name))
+            {
+                System.Console.WriteLine("That Person is already in the Database");
+            } else
+            {
+                names.Add(name);
+            }
+        }
         public static void RemoveNames(string name)
         {
             if(names.Contains(name))
