@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JCBL
+namespace InventoryLib
 {
     public class Class1
     {
