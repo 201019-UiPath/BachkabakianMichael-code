@@ -120,6 +120,40 @@ namespace UserLib
             System.Console.WriteLine($"{names[listindex]} {emails[listindex]} {passwords[listindex]} {managerstatus[listindex]}");
 
         }
+
+        //method that prompts user for login info and sends them to the approriate menu
+        // public void login()
+        // {
+        //     string pw;
+        //     bool isuserwrong = true;
+
+        //     System.Console.WriteLine("Please Enter Your Email: ");
+        //     string email = Console.ReadLine();
+            
+        //     while(isuserwrong)
+        //     {
+        //         if (names.contains(email))
+        //         {
+        //             System.Console.WriteLine("Please Enter Your Password: ");
+        //             pw = Console.ReadLine();
+        //             if (passwords.Contains(pw) && managerstatus == true)
+        //             {
+        //                 //opens manager menu
+        //                 isuserwrong = false;
+        //             } else if ((passwords.Contains(pw) && managerstatus == false))
+        //             {
+        //                 //opens customer menu
+        //                 isuserwrong = false;
+        //             } else {
+        //                 System.Console.WriteLine("The Password You've Entered Is Incorrect, Please Try Again");
+        //                 pw = Console.ReadLine();
+        //             }
+        //         } else {
+        //             System.Console.WriteLine("That Email Address Does Not Match Our Records, Please Try Again");
+        //             pw = Console.ReadLine();
+        //         }
+        //     }
+        // }
         #region code to prompt user for a name to remove, and to remove it from the names list (goes in the main method)
         /*System.Console.WriteLine("Please enter a name to remove: ");
             string nm = Console.ReadLine();

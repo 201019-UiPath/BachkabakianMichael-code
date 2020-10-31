@@ -1,4 +1,4 @@
-namespace JCUI.Menus
+namespace JCUI
 {
     /// <summary>
     /// Menu interface

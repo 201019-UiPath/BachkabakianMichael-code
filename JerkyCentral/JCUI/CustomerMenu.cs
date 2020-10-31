@@ -1,4 +1,6 @@
-namespace JCUI.Menus
+using System;
+
+namespace JCUI
 {
     /// <summary>
     /// Menu that is displayed to customers
@@ -18,16 +20,16 @@ namespace JCUI.Menus
             switch (choice)
             {
                 case "1":
-                    System.Console.WriteLine();
+                    System.Console.WriteLine("choice 1 has been chosen");
                         break;
                 case "2":
-                    System.Console.WriteLine();
+                    System.Console.WriteLine("choice 2 has been chosen");
                         break;
                 case "3":
-                    System.Console.WriteLine();
+                    System.Console.WriteLine("choice 3 has been chosen");
                         break;
                 default:
-                    System.Console.WriteLine();
+                    System.Console.WriteLine("your an idiot");
                     break;
             }
         }
