@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JCDB
+namespace ProductLib
 {
     public class Class1
     {
