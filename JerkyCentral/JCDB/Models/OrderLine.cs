@@ -1,6 +1,6 @@
 namespace JCDB.Models
 {
-    public class OrderLineItem
+    public class OrderLine
     {
         public int OrderId { get; set; }
         public int ProductId { get; set; }

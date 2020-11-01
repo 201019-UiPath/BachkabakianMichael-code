@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using JCDB.Models;
 
 namespace JCDB
 {
-    public class IBrandRepo
+    /// <summary>
+    /// Data access interface for product brands
+    /// </summary>
+    public interface IBrandRepo
     {
-        void AddBrand(Brand brand);
+        void AddBrandAsync(Brand brand);
         List<Brand> GetAllBrands();
     }
 }

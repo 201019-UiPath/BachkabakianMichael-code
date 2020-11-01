@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\UserLib\UserLib.csproj" />
+    <ProjectReference Include="..\JCDB\JCDB.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
