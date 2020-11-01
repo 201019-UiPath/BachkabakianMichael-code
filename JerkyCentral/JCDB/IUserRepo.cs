@@ -4,13 +4,12 @@ using JCDB.Models;
 
 namespace JCDB
 {
+    /// <summary>
+    /// Data access interface for JerkyCentral users
+    /// </summary>
     public interface IUserRepo
     {
-        /// <summary>
-        /// Data access interface for Users
-        /// </summary>
-        /// <param name="user"></param>
-        void AddUser(User user);
+        void AddUserAsync(User user);
         List<User> GetAllUsers();
     }
 }

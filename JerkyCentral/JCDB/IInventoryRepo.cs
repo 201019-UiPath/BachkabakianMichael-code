@@ -9,7 +9,7 @@ namespace JCDB
     /// </summary>
     public interface IInventoryRepo
     {
-        void AddInventory(Inventory inventory);
+        void AddInventoryAsync(Inventory inventory);
         List<Inventory> GetAllInventories();
     }
 }

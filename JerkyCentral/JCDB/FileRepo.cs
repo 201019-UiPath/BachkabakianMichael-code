@@ -12,14 +12,22 @@ namespace JCDB
     /// </summary>
     public class FileRepo : IBrandRepo, ICategoryRepo, IInventoryRepo, ILocationRepo, IOrderLineRepo, IOrderRepo, IProductRepo, IUserRepo
     {
-        string filepath = "JerkyCentral/JCDB/Users/Users.txt";
+        string brandfilepath = "JerkyCentral/JCDB/Brands/Brands.txt";
+        string categoryfilepath = "JerkyCentral/JCDB/Categories/Categories.txt";
+        string inventoryfilepath = "JerkyCentral/JCDB/Inventories/Inventories.txt";
+        string locationfilepath = "JerkyCentral/JCDB/Locations/Locations.txt";
+        string orderlinefilepath = "JerkyCentral/JCDB/OrderLines/OrderLines.txt";
+        string orderfilepath = "JerkyCentral/JCDB/Orders/Orders.txt";
+        string productfilepath = "JerkyCentral/JCDB/Products/Products.txt";
+        string userfilepath = "JerkyCentral/JCDB/Users/Users.txt";
+        
         /// <summary>
         /// brand repo methods
         /// </summary>
         /// <param name="brand"></param>
         public async void AddBrandAsync(Brand brand)
         {
-            using(FileStream fs = File.Create(filepath))
+            using(FileStream fs = File.Create(brandfilepath))
             {
                 await JsonSerializer.SerializeAsync(fs, brand);
                 System.Console.WriteLine("Brand is being written to file");
@@ -34,9 +42,13 @@ namespace JCDB
         /// category repo methods
         /// </summary>
         /// <param name="category"></param>
-        public void AddCategory(Category category)
+        public async void AddCategoryAsync(Category category)
         {
-            throw new System.NotImplementedException();
+            using(FileStream fs = File.Create(categoryfilepath))
+            {
+                await JsonSerializer.SerializeAsync(fs, category);
+                System.Console.WriteLine("Category is being written to file");
+            }
         }
         public List<Category> GetAllCategories()
         {
@@ -47,9 +59,13 @@ namespace JCDB
         /// inventory repo methods
         /// </summary>
         /// <param name="inventory"></param>
-        public void AddInventory(Inventory inventory)
+        public async void AddInventoryAsync(Inventory inventory)
         {
-            throw new System.NotImplementedException();
+            using(FileStream fs = File.Create(inventoryfilepath))
+            {
+                await JsonSerializer.SerializeAsync(fs, inventory);
+                System.Console.WriteLine("Inventory is being written to file");
+            }
         }
         public List<Inventory> GetAllInventories()
         {
@@ -60,9 +76,13 @@ namespace JCDB
         /// location repo methods
         /// </summary>
         /// <param name="location"></param>
-        public void AddLocation(Location location)
+        public async void AddLocationAsync(Location location)
         {
-            throw new System.NotImplementedException();
+            using(FileStream fs = File.Create(locationfilepath))
+            {
+                await JsonSerializer.SerializeAsync(fs, location);
+                System.Console.WriteLine("Location is being written to file");
+            }
         }
         public List<Location> GetAllLocations()
         {
@@ -73,9 +93,13 @@ namespace JCDB
         /// orderline repo methods
         /// </summary>
         /// <param name="orderline"></param>
-        public void AddOrderLine(OrderLine orderline)
+        public async void AddOrderLineAsync(OrderLine orderline)
         {
-            throw new System.NotImplementedException();
+            using(FileStream fs = File.Create(orderlinefilepath))
+            {
+                await JsonSerializer.SerializeAsync(fs, orderline);
+                System.Console.WriteLine("OrderLine is being written to file");
+            }
         }
         public List<OrderLine> GetAllOrderLines()
         {
@@ -86,9 +110,13 @@ namespace JCDB
         /// order repo methods
         /// </summary>
         /// <param name="order"></param>
-        public void AddOrder(Order order)
+        public async void AddOrderAsync(Order order)
         {
-            throw new System.NotImplementedException();
+            using(FileStream fs = File.Create(orderfilepath))
+            {
+                await JsonSerializer.SerializeAsync(fs, order);
+                System.Console.WriteLine("Order is being written to file");
+            }
         }
         public List<Order> GetAllOrders()
         {
@@ -99,9 +127,13 @@ namespace JCDB
         /// product repo methods
         /// </summary>
         /// <param name="product"></param>
-        public void AddProduct(Product product)
+        public async void AddProductAsync(Product product)
         {
-            throw new System.NotImplementedException();
+            using(FileStream fs = File.Create(productfilepath))
+            {
+                await JsonSerializer.SerializeAsync(fs, product);
+                System.Console.WriteLine("Product is being written to file");
+            }
         }
         public List<Product> GetAllProducts()
         {
@@ -112,9 +144,13 @@ namespace JCDB
         /// user repo methods
         /// </summary>
         /// <param name="user"></param>
-        public void AddUser(User user)
+        public async void AddUserAsync(User user)
         {
-            throw new System.NotImplementedException();
+            using(FileStream fs = File.Create(userfilepath))
+            {
+                await JsonSerializer.SerializeAsync(fs, user);
+                System.Console.WriteLine("User is being written to file");
+            }
         }
         public List<User> GetAllUsers()
         {

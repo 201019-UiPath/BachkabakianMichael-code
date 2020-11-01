@@ -9,7 +9,7 @@ namespace JCDB
     /// </summary>
     public interface ICategoryRepo
     {
-        void AddCategory(Category category);
+        void AddCategoryAsync(Category category);
         List<Category> GetAllCategories();
     }
 }

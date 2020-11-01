@@ -9,7 +9,7 @@ namespace JCDB
     /// </summary>
     public interface IOrderLineRepo
     {
-        void AddOrderLine(OrderLine orderline);
+        void AddOrderLineAsync(OrderLine orderline);
         List<OrderLine> GetAllOrderLines();
     }
 }

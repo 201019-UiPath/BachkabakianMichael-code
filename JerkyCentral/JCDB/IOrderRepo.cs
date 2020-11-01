@@ -9,7 +9,7 @@ namespace JCDB
     /// </summary>
     public interface IOrderRepo
     {
-        void AddOrder(Order order);
+        void AddOrderAsync(Order order);
         List<Order> GetAllOrders();
     }
 }

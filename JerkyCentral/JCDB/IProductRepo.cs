@@ -9,7 +9,7 @@ namespace JCDB
     /// </summary>
     public interface IProductRepo
     {
-        void AddProduct(Product product);
+        void AddProductAsync(Product product);
         List<Product> GetAllProducts();
     }
 }

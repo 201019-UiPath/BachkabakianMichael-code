@@ -9,7 +9,7 @@ namespace JCDB
     /// </summary>
     public interface ILocationRepo
     {
-        void AddLocation(Location location);
+        void AddLocationAsync(Location location);
         List<Location> GetAllLocations();
     }
 }
