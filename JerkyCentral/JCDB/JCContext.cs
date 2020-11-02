@@ -5,7 +5,7 @@ using System.IO;
 
 namespace JCDB
 {
-    public class JCContext : DBContext
+    public class JCContext : DbContext
     {
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
