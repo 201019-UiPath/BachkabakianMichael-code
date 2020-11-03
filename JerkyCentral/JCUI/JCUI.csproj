@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JCDB\JCDB.csproj" />
+    <ProjectReference Include="..\JCLib\JCLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>
