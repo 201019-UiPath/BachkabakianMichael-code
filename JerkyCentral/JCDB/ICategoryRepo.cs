@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using JCDB.Models;
 
 namespace JCDB
@@ -10,6 +11,10 @@ namespace JCDB
     public interface ICategoryRepo
     {
         void AddCategoryAsync(Category category);
-        List<Category> GetAllCategories();
+        void UpdateCategory(Category category);
+        void DeleteCategory(Category category);
+        Category GetCategoryById(int id);
+        Category GetCategoryByName(string name);
+        Task<List<Category>> GetAllCategoriesAsync();
     }
 }

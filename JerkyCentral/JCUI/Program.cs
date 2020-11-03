@@ -9,7 +9,7 @@ namespace JCUI
         static void Main(string[] args)
         {   //0. Create user obj with constructor from user class 
             User customer = new User();
-            //System.Console.WriteLine("hi");
+            System.Console.WriteLine("hi");
             
             // System.Console.WriteLine("add some1");
             // string test = Console.ReadLine();

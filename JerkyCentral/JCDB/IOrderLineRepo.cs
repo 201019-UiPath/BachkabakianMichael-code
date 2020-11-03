@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using JCDB.Models;
 
 namespace JCDB
@@ -10,6 +11,9 @@ namespace JCDB
     public interface IOrderLineRepo
     {
         void AddOrderLineAsync(OrderLine orderline);
-        List<OrderLine> GetAllOrderLines();
+        void UpdateOrderLine(OrderLine orderLine);
+        void DeleteOrderLine(OrderLine orderLine);
+        OrderLine GetOrderLineByOrderLineId(int id);
+        Task<List<OrderLine>> GetAllOrderLinesAsync();
     }
 }

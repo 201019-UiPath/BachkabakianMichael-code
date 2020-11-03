@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using JCDB.Models;
 
 namespace JCDB
@@ -10,6 +11,11 @@ namespace JCDB
     public interface IUserRepo
     {
         void AddUserAsync(User user);
-        List<User> GetAllUsers();
+        void UpdateUser(User user);
+        void DeleteUser(User user);
+        User GetUserById(int id);
+        User GetUserByName(string name);
+        User GetUserByManagerStatus(bool status);
+        Task<List<User>> GetAllUsersAsync();
     }
 }

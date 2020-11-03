@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using JCDB.Models;
 
 namespace JCDB
@@ -10,6 +11,10 @@ namespace JCDB
     public interface IProductRepo
     {
         void AddProductAsync(Product product);
-        List<Product> GetAllProducts();
+        void UpdateProduct(Product product);
+        void DeleteProduct(Product product);
+        Product GetProductById(int id);
+        Product GetProductByName(string name);
+        Task<List<Product>> GetAllProductsAsync();
     }
 }

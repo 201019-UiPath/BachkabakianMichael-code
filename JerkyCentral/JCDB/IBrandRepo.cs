@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using JCDB.Models;
 
 namespace JCDB
@@ -10,6 +11,12 @@ namespace JCDB
     public interface IBrandRepo
     {
         void AddBrandAsync(Brand brand);
-        List<Brand> GetAllBrands();
+        void UpdateBrand(Brand brand);
+        void DeleteBrand(Brand brand);
+        Brand GetBrandById(int id);
+        Brand GetBrandByName(string name);
+        Task<List<Brand>> GetAllBrandsAsync();
+
+
     }
 }
