@@ -46,12 +46,13 @@ namespace JCDB.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("UserID")
+                    b.Property<int>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("CartId");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Carts");
                 });
@@ -63,20 +64,20 @@ namespace JCDB.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("CartId")
+                    b.Property<int>("CartId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProductId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("UserProductId")
                         .HasColumnType("integer");
 
                     b.HasKey("CartLineId");
 
                     b.HasIndex("CartId");
 
-                    b.HasIndex("UserProductId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("CartLines");
                 });
@@ -111,10 +112,10 @@ namespace JCDB.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("LocationId")
+                    b.Property<int>("LocationId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("integer");
 
                     b.Property<int>("QuantityOnHand")
@@ -142,12 +143,7 @@ namespace JCDB.Migrations
                     b.Property<string>("LocationName")
                         .HasColumnType("text");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("integer");
-
                     b.HasKey("LocationId");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Locations");
                 });
@@ -159,10 +155,18 @@ namespace JCDB.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("OrderDate")
-                        .HasColumnType("text");
+                    b.Property<int>("LocationId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("OrderId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -174,10 +178,10 @@ namespace JCDB.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Quantity")
@@ -199,8 +203,14 @@ namespace JCDB.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("ListPrice")
+                    b.Property<int>("BrandId")
                         .HasColumnType("integer");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("ListPrice")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("ProductName")
                         .HasColumnType("text");
@@ -226,15 +236,10 @@ namespace JCDB.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("PassWord")
                         .HasColumnType("text");
 
                     b.HasKey("UserID");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Users");
                 });
@@ -249,19 +254,25 @@ namespace JCDB.Migrations
             modelBuilder.Entity("JCDB.Models.Cart", b =>
                 {
                     b.HasOne("JCDB.Models.User", "user")
-                        .WithMany()
-                        .HasForeignKey("UserID");
+                        .WithOne("cart")
+                        .HasForeignKey("JCDB.Models.Cart", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("JCDB.Models.CartLine", b =>
                 {
                     b.HasOne("JCDB.Models.Cart", "Cart")
-                        .WithMany()
-                        .HasForeignKey("CartId");
+                        .WithMany("CartLines")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("JCDB.Models.Product", "User")
+                    b.HasOne("JCDB.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("UserProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("JCDB.Models.Category", b =>
@@ -274,37 +285,40 @@ namespace JCDB.Migrations
             modelBuilder.Entity("JCDB.Models.Inventory", b =>
                 {
                     b.HasOne("JCDB.Models.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId");
+                        .WithMany("Inventory")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("JCDB.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("JCDB.Models.Location", b =>
+            modelBuilder.Entity("JCDB.Models.Order", b =>
                 {
-                    b.HasOne("JCDB.Models.Order", null)
-                        .WithMany("Location")
-                        .HasForeignKey("OrderId");
+                    b.HasOne("JCDB.Models.User", null)
+                        .WithMany("Order")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("JCDB.Models.OrderLine", b =>
                 {
                     b.HasOne("JCDB.Models.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId");
+                        .WithMany("OrderLine")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("JCDB.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
-                });
-
-            modelBuilder.Entity("JCDB.Models.User", b =>
-                {
-                    b.HasOne("JCDB.Models.Order", null)
-                        .WithMany("User")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
