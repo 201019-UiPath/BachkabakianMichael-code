@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JCDB
 {
-    public class DBRepo : IBrandRepo, ICategoryRepo, IInventoryRepo, ILocationRepo, IOrderLineRepo, IOrderRepo, IProductRepo, IUserRepo
+    public class DBRepo : IBrandRepo, ICategoryRepo, IInventoryRepo, ILocationRepo, IOrderLineRepo, IOrderRepo, IProductRepo, IUserRepo, ICartRepo, ICartLineRepo
     {
         private JCContext context;
 
@@ -298,7 +298,66 @@ namespace JCDB
 
         public Task<List<User>> GetAllUsersAsync()
         {
-            throw new System.NotImplementedException();
+            return context.Users.Select(x => x).ToListAsync();
+        }
+
+        /// <summary>
+        /// CRUD methods for my Carts
+        /// </summary>
+        /// <param name="cart"></param>
+        public void AddCartAsync(Cart cart)
+        {
+            context.Carts.AddAsync(cart);
+            context.SaveChangesAsync();
+        }
+
+        public void UpdateCart(Cart cart)
+        {
+            context.Carts.Update(cart);
+            context.SaveChanges();
+        }
+
+        public void DeleteCart(Cart cart)
+        {
+            context.Carts.Remove(cart);
+            context.SaveChanges();
+        }
+
+        public Cart GetCartById(int id)
+        {
+            return (Cart) context.Carts.Single(x => x.CartId == id);
+        }
+
+        /// <summary>
+        /// CRUD methods for CartLines
+        /// </summary>
+        /// <param name="cartLine"></param>
+        public void AddCartLineAsync(CartLine cartLine)
+        {
+            context.CartLines.AddAsync(cartLine);
+            context.SaveChangesAsync();
+        }
+
+        public void UpdateCartLine(CartLine cartLine)
+        {
+            context.CartLines.Update(cartLine);
+            context.SaveChanges();
+        }
+
+        public void DeleteCartLine(CartLine cartLine)
+        {
+            context.CartLines.Remove(cartLine);
+            context.SaveChanges();
+        }
+
+        public CartLine GetCartLineById(int id)
+        {
+            return (CartLine) context.CartLines.Single(x => x.CartLineId == id);
+        }
+
+        public Task<List<CartLine>> GetAllCartLinesByCartIdAsync(int id)
+        {
+            return context.CartLines.Select(x => x).ToListAsync();
         }
     }
 }

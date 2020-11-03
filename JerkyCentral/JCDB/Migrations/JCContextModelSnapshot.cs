@@ -39,6 +39,48 @@ namespace JCDB.Migrations
                     b.ToTable("Brands");
                 });
 
+            modelBuilder.Entity("JCDB.Models.Cart", b =>
+                {
+                    b.Property<int>("CartId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("UserID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("CartId");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("JCDB.Models.CartLine", b =>
+                {
+                    b.Property<int>("CartLineId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("CartId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UserProductId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("CartLineId");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("UserProductId");
+
+                    b.ToTable("CartLines");
+                });
+
             modelBuilder.Entity("JCDB.Models.Category", b =>
                 {
                     b.Property<int>("CategoryId")
@@ -69,10 +111,20 @@ namespace JCDB.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<int?>("LocationId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("QuantityOnHand")
                         .HasColumnType("integer");
 
                     b.HasKey("InventoryId");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Inventories");
                 });
@@ -87,9 +139,6 @@ namespace JCDB.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("text");
 
-                    b.Property<int?>("InventoryId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("LocationName")
                         .HasColumnType("text");
 
@@ -97,8 +146,6 @@ namespace JCDB.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("LocationId");
-
-                    b.HasIndex("InventoryId");
 
                     b.HasIndex("OrderId");
 
@@ -115,12 +162,7 @@ namespace JCDB.Migrations
                     b.Property<string>("OrderDate")
                         .HasColumnType("text");
 
-                    b.Property<int?>("OrderLineId")
-                        .HasColumnType("integer");
-
                     b.HasKey("OrderId");
-
-                    b.HasIndex("OrderLineId");
 
                     b.ToTable("Orders");
                 });
@@ -132,7 +174,20 @@ namespace JCDB.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
                     b.HasKey("OrderLineId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderLines");
                 });
@@ -144,23 +199,13 @@ namespace JCDB.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("InventoryId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("ListPrice")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("OrderLineId")
                         .HasColumnType("integer");
 
                     b.Property<string>("ProductName")
                         .HasColumnType("text");
 
                     b.HasKey("ProductId");
-
-                    b.HasIndex("InventoryId");
-
-                    b.HasIndex("OrderLineId");
 
                     b.ToTable("Products");
                 });
@@ -201,6 +246,24 @@ namespace JCDB.Migrations
                         .HasForeignKey("ProductId");
                 });
 
+            modelBuilder.Entity("JCDB.Models.Cart", b =>
+                {
+                    b.HasOne("JCDB.Models.User", "user")
+                        .WithMany()
+                        .HasForeignKey("UserID");
+                });
+
+            modelBuilder.Entity("JCDB.Models.CartLine", b =>
+                {
+                    b.HasOne("JCDB.Models.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("CartId");
+
+                    b.HasOne("JCDB.Models.Product", "User")
+                        .WithMany()
+                        .HasForeignKey("UserProductId");
+                });
+
             modelBuilder.Entity("JCDB.Models.Category", b =>
                 {
                     b.HasOne("JCDB.Models.Product", null)
@@ -208,33 +271,33 @@ namespace JCDB.Migrations
                         .HasForeignKey("ProductId");
                 });
 
+            modelBuilder.Entity("JCDB.Models.Inventory", b =>
+                {
+                    b.HasOne("JCDB.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+
+                    b.HasOne("JCDB.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+                });
+
             modelBuilder.Entity("JCDB.Models.Location", b =>
                 {
-                    b.HasOne("JCDB.Models.Inventory", null)
-                        .WithMany("Location")
-                        .HasForeignKey("InventoryId");
-
                     b.HasOne("JCDB.Models.Order", null)
                         .WithMany("Location")
                         .HasForeignKey("OrderId");
                 });
 
-            modelBuilder.Entity("JCDB.Models.Order", b =>
+            modelBuilder.Entity("JCDB.Models.OrderLine", b =>
                 {
-                    b.HasOne("JCDB.Models.OrderLine", null)
-                        .WithMany("Order")
-                        .HasForeignKey("OrderLineId");
-                });
+                    b.HasOne("JCDB.Models.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId");
 
-            modelBuilder.Entity("JCDB.Models.Product", b =>
-                {
-                    b.HasOne("JCDB.Models.Inventory", null)
-                        .WithMany("Product")
-                        .HasForeignKey("InventoryId");
-
-                    b.HasOne("JCDB.Models.OrderLine", null)
-                        .WithMany("Product")
-                        .HasForeignKey("OrderLineId");
+                    b.HasOne("JCDB.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("JCDB.Models.User", b =>

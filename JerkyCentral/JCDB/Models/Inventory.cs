@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace JCDB.Models
 {
     public class Inventory
@@ -7,8 +5,8 @@ namespace JCDB.Models
         //public int LocationId { get; set; }
         //public int ProductId { get; set; }
         public int InventoryId { get; set; }
-        public List<Location> Location { get; set; }
-        public List<Product> Product { get; set; }
+        public Location Location { get; set; }
+        public Product Product { get; set; }
         public int QuantityOnHand { get; set; }
     }
 }

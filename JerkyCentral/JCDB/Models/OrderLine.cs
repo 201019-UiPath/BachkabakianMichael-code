@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace JCDB.Models
 {
     public class OrderLine
@@ -7,7 +5,8 @@ namespace JCDB.Models
         // public int OrderId { get; set; }
         // public int ProductId { get; set; }
         public int OrderLineId { get; set; }
-        public List <Order> Order { get; set; }
-        public List <Product> Product { get; set; }
+        public Order Order { get; set; }
+        public Product Product { get; set; }
+        public int Quantity { get; set; }
     }
 }

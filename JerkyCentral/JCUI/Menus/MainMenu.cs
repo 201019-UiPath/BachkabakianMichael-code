@@ -1,4 +1,4 @@
-namespace JCUI
+namespace JCUI.Menus
 {
     /// <summary>
     /// Welcome Menu for JerkyCentral

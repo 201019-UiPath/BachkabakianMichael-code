@@ -1,6 +1,6 @@
 using System;
 
-namespace JCUI
+namespace JCUI.Menus
 {
     /// <summary>
     /// Menu that is displayed to customers
