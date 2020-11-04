@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using JCDB.Models;
 
 namespace JCDB
@@ -14,6 +13,6 @@ namespace JCDB
         void DeleteLocation(Location location);
         Location GetLocationById(int id);
         Location GetLocationByName(string name);
-        Task<List<Location>> GetAllLocationsAsync();
+        List<Location> GetAllLocations();
     }
 }

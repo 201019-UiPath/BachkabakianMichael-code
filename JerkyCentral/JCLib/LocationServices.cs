@@ -35,9 +35,9 @@ namespace JCLib
             Location location = repo.GetLocationByName(name);
             return location;
         }
-        public Task<List<Location>> GetAllLocations()
+        public List<Location> GetAllLocations()
         {
-            Task<List<Location>> locations = repo.GetAllLocationsAsync();
+            List<Location> locations = repo.GetAllLocations();
             return locations;
         }
     }

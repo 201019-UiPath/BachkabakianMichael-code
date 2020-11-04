@@ -28,5 +28,10 @@ namespace JCLib
             Cart cart = repo.GetCartById(id);
             return cart;
         }
+        public Cart GetCartByUserId(int UserId) 
+        {
+             Cart cart = repo.GetCartByUserId(UserId);
+             return cart;
+        }
     }
 }

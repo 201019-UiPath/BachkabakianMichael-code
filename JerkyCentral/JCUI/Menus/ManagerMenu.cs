@@ -1,4 +1,7 @@
 using System;
+using JCDB;
+using JCDB.Models;
+using JCLib;
 
 namespace JCUI.Menus
 {
@@ -7,27 +10,48 @@ namespace JCUI.Menus
     /// </summary>
     public class ManagerMenu:IMenu
     {
+        private string userInput;
+        private User validUser; //user after their name and pw have been confirmed
+        private IUserRepo userRepo;
+        private ILocationRepo locationRepo;
+        private UserServices userServices;
+        private LocationServices locationServices;
+        private ReplenishInventoryMenu replenishInventoryMenu;
+        
+        public ManagerMenu(User user, JCContext context, IUserRepo userRepo, ILocationRepo locationRepo)
+        {
+            this.validUser = user;
+            this.userRepo = userRepo;
+            this.locationRepo = locationRepo;
+            this.userServices = new UserServices(userRepo);
+            this.locationServices = new LocationServices(locationRepo);
+            this.replenishInventoryMenu = new ReplenishInventoryMenu(validUser, context, new DBRepo(context), new DBRepo(context), new DBRepo(context));
+        }
         public void Start()
         {
-            System.Console.WriteLine("Entered Manager Console. What would you like to do?");
-            //options
-            System.Console.WriteLine("[1] Replenish Inventory");
-            System.Console.WriteLine("[2] View Location Inventory");
-            //take input
-            string choice = System.Console.ReadLine();
+            do{
+                System.Console.WriteLine("Entered Manager Console. What would you like to do?");
 
-            switch (choice)
-            {
-                case "1":
-                    System.Console.WriteLine("choice 1 has been chosen");
+                System.Console.WriteLine("Press [0] to Replenish Inventory");
+                System.Console.WriteLine("Press [1] to Exit The Application");
+
+                userInput = Console.ReadLine();
+
+                switch(userInput)
+                {
+                    case "0":
+                        replenishInventoryMenu.Start();
                         break;
-                case "2":
-                    System.Console.WriteLine("choice 2 has been chosen");
+                    case "1":
+                        System.Console.WriteLine("Come back soon!");
+                        break;                   
+                    default:
+                        System.Console.WriteLine("Put on your glasses and try again");
                         break;
-                default:
-                    System.Console.WriteLine("your an idiot");
-                    break;
-            }
+                }
+
+
+            } while(!userInput.Equals("2"));
         }
     }
 }

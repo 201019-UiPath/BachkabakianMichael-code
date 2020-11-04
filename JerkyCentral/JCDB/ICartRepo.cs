@@ -11,5 +11,6 @@ namespace JCDB
         void UpdateCart(Cart cart);
         void DeleteCart(Cart cart);
         Cart GetCartById(int id);
+        Cart GetCartByUserId(int userId);
     }
 }

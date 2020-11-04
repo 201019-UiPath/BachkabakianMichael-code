@@ -116,6 +116,14 @@ namespace JCDB
             return (Inventory) context.Inventories.Single(x => x.InventoryId == id);
         }
 
+        public Inventory GetInventoryByLocationIdProductId(int locationId, int productId) {
+            return (Inventory) context.Inventories.Single(x => x.LocationId == locationId && x.ProductId == productId);
+        }
+
+        public List<Inventory> GetAllInventoryItemsByLocationId(int locationId) {
+        return context.Inventories.Select(x => x).Where(x => x.LocationId == locationId).ToList();
+        }
+
         public List<Inventory> GetAllInventoryById(int id)
         {
             return context.Inventories.Where(x => x.InventoryId == id).ToList();
@@ -153,9 +161,9 @@ namespace JCDB
             return (Location) context.Locations.Single(x => x.LocationName == name);
         }
 
-        public Task<List<Location>> GetAllLocationsAsync()
+        public List<Location> GetAllLocations()
         {
-            return context.Locations.Select(x => x).ToListAsync();
+            return context.Locations.Select(x => x).ToList();
         }
 
         /// <summary>
