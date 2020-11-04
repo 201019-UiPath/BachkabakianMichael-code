@@ -42,10 +42,10 @@ namespace JCUI.Menus
             switch (choice)
             {
                 case "1":
-                    System.Console.WriteLine("choice 1 has been chosen");
+                    System.Console.WriteLine("You placed an order!");
                         break;
                 case "2":
-                    System.Console.WriteLine("choice 2 has been chosen");
+                    System.Console.WriteLine("You looked at your order history!");
                         break;
                 case "3":
                     System.Console.WriteLine("For which location? ");
