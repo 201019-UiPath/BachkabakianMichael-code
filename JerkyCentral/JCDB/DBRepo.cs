@@ -336,6 +336,11 @@ namespace JCDB
             return (Cart) context.Carts.Single(x => x.CartId == id);
         }
 
+        public Cart GetCartByUserId(int id) 
+        {
+            return (Cart) context.Carts.Single(x => x.UserId == id);
+        }
+
         /// <summary>
         /// CRUD methods for CartLines
         /// </summary>
